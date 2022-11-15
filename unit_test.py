@@ -98,7 +98,7 @@ Q = "What can I help you with today?"
 #userInput = "My email id is r.vinoth@live.com"
 #botAnswer = "r.vinoth@live.com"
 userInput = "book a flight from paris to berlin for the 12/12/12 until 12/12/22 for $1200 max"
-botAnswer = "To what city would you like to travel?"
+botAnswer = "AAAAAA To what city would you like to travel?"
 
 
 class EmailPromptTest(aiounittest.AsyncTestCase):
