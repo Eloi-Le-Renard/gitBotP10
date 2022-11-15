@@ -132,7 +132,8 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs = DialogSet(dialogs_state)
         dialogs.add(EmailPrompt("emailprompt"))
 
-        step1 = await adapter.test('Hello', Q)
+        #step1 = await adapter.test('Hello', Q)
+        step1 = await adapter.test('niktamere')
         step2 = await step1.send(userInput)
         #await step2.assert_reply(Q)
 
