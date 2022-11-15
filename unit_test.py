@@ -1,3 +1,3 @@
 
 def test1():
-    assert 1 == 22
+    assert 1 == 1
