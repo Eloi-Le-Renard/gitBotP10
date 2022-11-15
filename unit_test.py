@@ -132,7 +132,11 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
 
         step1 = await adapter.test('Hello', Q)
         step2 = await step1.send(userInput)
-        await step2.assert_reply(Q)
+        #await step2.assert_reply(Q)
+
+        # + dialog ?
+        step3 = await step2.send(userInput)
+        await step3.assert_reply(botAnswer)
         
         
 def test1():
