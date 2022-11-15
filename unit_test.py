@@ -40,30 +40,7 @@ class EmailPrompt (Prompt):
             if options.prompt is not None:
                 await turn_context.send_activity(options.prompt)    
 
-    async def on_recognize(self,
-        turn_context: TurnContext, 
-        state: Dict[str, object], 
-        options: PromptOptions, 
-    ) -> PromptRecognizerResult:  
-        if not turn_context:
-            raise TypeError("turn_context cannt be none")
 
-        if turn_context.activity.type == ActivityTypes.message:
-            usertext = turn_context.activity.text
-        
-        turn_context.activity.locale = self._defaultLocale
-
-        recong = SequenceRecognizer(turn_context.activity.locale)
-        mode = recong.get_email_model()
-        mode_result = mode.parse(usertext)
-
-        prompt_result = PromptRecognizerResult()
-
-        if len(mode_result) > 0 and len(mode_result[0].resolution) > 0:
-            prompt_result.value = mode_result[0].resolution["value"]
-            prompt_result.succeeded = True
-
-        return prompt_result
     
     
 
