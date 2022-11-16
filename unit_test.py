@@ -113,7 +113,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                 options = PromptOptions(
                     prompt = Activity(
                         type = ActivityTypes.message, 
-                        text = Q
+                        text = 'What can I help you with today?'
                         )
                     )
                 await dialog_context.prompt("cityprompt", options)
