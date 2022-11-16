@@ -96,7 +96,7 @@ from botbuilder.dialogs import DialogSet, DialogTurnStatus
 from botbuilder.core.adapters import TestAdapter
 
 #Q = "What is your email address?"
-Q = "niktamere2"#"BBBBBB What can I help you with today?"
+Q = "To what city would you like to travel?"#"niktamere2"#"BBBBBB What can I help you with today?"
 #userInput = "My email id is r.vinoth@live.com"
 #botAnswer = "r.vinoth@live.com"
 userInput = "book a flight from paris to berlin for the 12/12/12 until 12/12/22 for $1200 max"
@@ -116,7 +116,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                         text = Q
                         )
                     )
-                await dialog_context.prompt("emailprompt", options)
+                await dialog_context.prompt("cityprompt", options)
 
             elif results.status == DialogTurnStatus.Complete:
                 reply = results.result
@@ -130,16 +130,21 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
 
         dialogs_state = conv_state.create_property("dialog-state")
         dialogs = DialogSet(dialogs_state)
-        dialogs.add(EmailPrompt("emailprompt"))
+        dialogs.add(EmailPrompt("cityprompt"))
 
+
+        step1 = await adapter.test('Hello', Q)
+        step2 = await step1.send('I want to travel to Paris')
+        await step2.assert_reply("Paris")
+        
         #step1 = await adapter.test('Hello', Q)
-        step1 = await adapter.test('niktameree',Q)
-        step2 = await step1.send(userInput)
+        #step1 = await adapter.test('niktameree',Q)
+        #step2 = await step1.send(userInput)
         #await step2.assert_reply(Q)
 
         # + dialog ?
-        step3 = await step2.send(userInput)
-        await step3.assert_reply(botAnswer)
+        #step3 = await step2.send(userInput)
+        #await step3.assert_reply(botAnswer)
         
         
 def test1():
