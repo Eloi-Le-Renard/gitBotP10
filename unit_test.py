@@ -54,9 +54,9 @@ class EmailPrompt (Prompt):
         turn_context.activity.locale = self._defaultLocale
 
         recong = SequenceRecognizer(turn_context.activity.locale)
-        #mode = recong.get
         # TODO
-        mode = recong.get_email_model()
+        #mode = recong.get_email_model()
+        mode = recong.get_url_model()
         mode_result = mode.parse(usertext)
 
         prompt_result = PromptRecognizerResult()
@@ -133,8 +133,9 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs.add(EmailPrompt("cityprompt"))
 
         step1 = await adapter.test('Hello', Q)
-        step2 = await step1.send('My email id is r.vinoth@live.com')
-        await step2.assert_reply("r.vinoth@live.com")
+        #step2 = await step1.send('My email id is r.vinoth@live.com')
+        step2 = await step1.send('Book a flight to Paris.com')
+        await step2.assert_reply("Paris.com")
         
         #step1 = await adapter.test('Hello', 'What can I help you with today?')
         #step2 = await step1.test(userInput, Q)
