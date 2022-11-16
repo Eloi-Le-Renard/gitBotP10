@@ -113,7 +113,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                 options = PromptOptions(
                     prompt = Activity(
                         type = ActivityTypes.message, 
-                        text = 'What can I help you with today?'
+                        text = 'What is your email address?'
                         )
                     )
                 await dialog_context.prompt("cityprompt", options)
@@ -132,12 +132,15 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs = DialogSet(dialogs_state)
         dialogs.add(EmailPrompt("cityprompt"))
 
-
-        step1 = await adapter.test('Hello', 'What can I help you with today?')
-        step2 = await step1.test(userInput, Q)
-        step3 = await step2.send("I want to go to Paris")
+        step1 = await adapter.test('Hello', 'What is your email address?')
+        step2 = await step1.send('My email id is r.vinoth@live.com')
+        await step2.assert_reply("r.vinoth@live.com")
+        
+        #step1 = await adapter.test('Hello', 'What can I help you with today?')
+        #step2 = await step1.test(userInput, Q)
+        #step3 = await step2.send("I want to go to Paris")
         #assert 
-        await step3.assert_reply("Paris")
+        #await step3.assert_reply("Paris")
         
         #step1 = await adapter.test('Hello', Q)
         #step1 = await adapter.test('niktameree',Q)
