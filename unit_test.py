@@ -133,9 +133,11 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs.add(EmailPrompt("cityprompt"))
 
 
-        step1 = await adapter.test('Hello', Q)
-        step2 = await step1.send('I want to travel to Paris')
-        await step2.assert_reply("Paris")
+        step1 = await adapter.test('Hello', 'What can I help you with today?')
+        step2 = await step1.test(userInput, Q)
+        step3 = await step2.send("I want to go to Paris")
+        #assert 
+        await step3.assert_reply("Paris")
         
         #step1 = await adapter.test('Hello', Q)
         #step1 = await adapter.test('niktameree',Q)
