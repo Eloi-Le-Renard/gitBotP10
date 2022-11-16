@@ -96,7 +96,7 @@ from botbuilder.dialogs import DialogSet, DialogTurnStatus
 from botbuilder.core.adapters import TestAdapter
 
 #Q = "What is your email address?"
-Q = "BBBBBB What can I help you with today?"
+Q = "niktamere2"#"BBBBBB What can I help you with today?"
 #userInput = "My email id is r.vinoth@live.com"
 #botAnswer = "r.vinoth@live.com"
 userInput = "book a flight from paris to berlin for the 12/12/12 until 12/12/22 for $1200 max"
@@ -133,7 +133,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs.add(EmailPrompt("emailprompt"))
 
         #step1 = await adapter.test('Hello', Q)
-        step1 = await adapter.test('niktamere','niktamere2')
+        step1 = await adapter.test('niktamere',Q)
         step2 = await step1.send(userInput)
         #await step2.assert_reply(Q)
 
