@@ -139,11 +139,11 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs = DialogSet(dialogs_state)
         dialogs.add(EmailPrompt("cityprompt"))
 
-        step1 = await adapter.test('Hello', Q)
-        #step2 = await step1.send('My email id is r.vinoth@live.com')
-        step2 = await step1.send('Book a flight to Paris ')
-        #assert step1 == step2
-        await step2.assert_reply("Paris")
+        #step1 = await adapter.test('Hello', Q)
+        ##step2 = await step1.send('My email id is r.vinoth@live.com')
+        #step2 = await step1.send('Book a flight to Paris ')
+        ##assert step1 == step2
+        #await step2.assert_reply("Paris")
         
         #step1 = await adapter.test('Hello', 'What can I help you with today?')
         #step2 = await step1.test(userInput, Q)
@@ -160,6 +160,22 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         #step3 = await step2.send(userInput)
         #await step3.assert_reply(botAnswer)
         
-        
+predictionKey = "df24026daeb14c39ace8906b63ccbb95"
+predictionEndpoint = "res-name.cognitiveservices.azure.com"
+predictionEndpoint = "https://res-name.cognitiveservices.azure.com/"
+app_id = "d5faaa9c-9a65-4b51-a994-ae05432f13fe"
+
+from msrest.authentication import CognitiveServicesCredentials
+from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
+
+runtimeCredentials = CognitiveServicesCredentials(predictionKey)
+clientRuntime = LUISRuntimeClient(endpoint=predictionEndpoint, credentials=runtimeCredentials)
+
 def test1():
-    assert 1 == 1
+    # Production == slot name
+    predictionRequest = { "query" : "book a flight from paris to berlin for the 12/12/12 until 12/12/22 for $1200 max" }
+    
+    predictionResponse = clientRuntime.prediction.get_slot_prediction(app_id, "Production", predictionRequest)
+    prediction_entities = predictionResponse.prediction.entities
+
+    assert prediction_entities['budget'] == [{'money': [{'number': 1200, 'units': 'Dollar'}]}]
