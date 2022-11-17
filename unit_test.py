@@ -62,8 +62,8 @@ class EmailPrompt (Prompt):
 
         recong = SequenceRecognizer(turn_context.activity.locale)
         # TODO
-        #mode = recong.get_email_model()
-        mode = recong.get_airport_model()
+        mode = recong.get_email_model()
+        #mode = recong.get_airport_model()
         mode_result = mode.parse(usertext)
 
         prompt_result = PromptRecognizerResult()
