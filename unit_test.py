@@ -23,4 +23,4 @@ prediction_entities = predictionResponse.prediction.entities
 assert prediction_entities['dst_city'] == [{'geographyV2': [{'value': 'berlin', 'type': 'city'}]}]
 
 
-
+assert 1 == 2
