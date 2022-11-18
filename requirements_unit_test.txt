@@ -1,5 +1,2 @@
-requests==2.23.0
-datatypes-date-time>=1.0.0.a1
-opencensus-ext-azure
-azure-cognitiveservices-language-luis>=0.7.0
+azure-cognitiveservices-language-luis
 msrest
