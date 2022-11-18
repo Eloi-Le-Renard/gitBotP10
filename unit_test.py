@@ -21,6 +21,3 @@ predictionRequest = { "query" : "book a flight to berlin" }
 predictionResponse = clientRuntime.prediction.get_slot_prediction(app_id, "Production", predictionRequest)
 prediction_entities = predictionResponse.prediction.entities
 assert prediction_entities['dst_city'] == [{'geographyV2': [{'value': 'berlin', 'type': 'city'}]}]
-
-
-assert 1 == 2
