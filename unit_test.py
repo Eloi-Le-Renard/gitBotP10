@@ -1,5 +1,4 @@
 
-        
 predictionKey = "0af9b79b2d8e40479cd0d639e4940a2b"
 predictionEndpoint = "https://res-namep10.cognitiveservices.azure.com/"
 app_id = "b6d4fabd-7cb8-4329-90eb-aa5065d6f141"
