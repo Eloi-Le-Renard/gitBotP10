@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/eloi/Documents/P10/gitClone3/botbuilder-samples/samples/python/21.corebot-app-insights/venv"
+VIRTUAL_ENV="/Users/eloi/Documents/P10/gitBotP10/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

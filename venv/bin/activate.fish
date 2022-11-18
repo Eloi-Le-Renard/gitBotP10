@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/eloi/Documents/P10/gitClone3/botbuilder-samples/samples/python/21.corebot-app-insights/venv"
+set -gx VIRTUAL_ENV "/Users/eloi/Documents/P10/gitBotP10/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

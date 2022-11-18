@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/eloi/Documents/P10/gitClone3/botbuilder-samples/samples/python/21.corebot-app-insights/venv"
+setenv VIRTUAL_ENV "/Users/eloi/Documents/P10/gitBotP10/venv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"
