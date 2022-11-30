@@ -1,7 +1,7 @@
 
-predictionKey = "0af9b79b2d8e40479cd0d639e4940a2b"
-predictionEndpoint = "https://res-namep10.cognitiveservices.azure.com/"
-app_id = "b6d4fabd-7cb8-4329-90eb-aa5065d6f141"
+predictionKey = "61a8d29177404906829359111ef928ea"
+predictionEndpoint = "https://luise-api-p10.cognitiveservices.azure.com"
+app_id = "992aa391-8f2e-4d23-ad82-be89361b9092"
 
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient

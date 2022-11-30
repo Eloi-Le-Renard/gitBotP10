@@ -210,8 +210,8 @@ class BookingDialog(CancelAndHelpDialog):
             msg = "you say YES, i confirmed your flight"
         else:
             msg = "you say NO, let's restart"
-            logger.warning("user say no", extra={'test': {'key_1': 'value_1', 'key_2': 'value_2'}})#step_context.dialogs)
-        
+            logger.warning("user say no", properties={'test': {'key_1': 'value_1', 'key_2': 'value_2'}})#step_context.dialogs)
+            #logger.warning("user say no")
         # voir journal log severity == 0 and message == "notConfirmed"
         self.telemetry_client.track_trace(name='notConfirmed', properties={"destination":str(booking_details.destination),
                                                                             "origin":str(booking_details.origin),
