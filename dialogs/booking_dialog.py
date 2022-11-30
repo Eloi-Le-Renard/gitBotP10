@@ -207,7 +207,7 @@ class BookingDialog(CancelAndHelpDialog):
         booking_details.validate = step_context.result
         
         if booking_details.validate == "yes":
-            msg = "you say YES, i confirmed your flight"
+            msg = "you say YESA, i confirmed your flight"
         else:
             msg = "you say NO, let's restart"
             logger.warning("user say no", properties={'test': {'key_1': 'value_1', 'key_2': 'value_2'}})#step_context.dialogs)
