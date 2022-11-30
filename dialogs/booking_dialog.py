@@ -1,5 +1,23 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
+
+import logging
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+
+logger = logging.getLogger(__name__)
+# TODO: replace the all-zero GUID with your instrumentation key.
+# 858507df-0f27-48e8-b598-4741bd6836e4
+logger.addHandler(AzureLogHandler(
+    #connection_string='InstrumentationKey='+CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY)
+    connection_string='InstrumentationKey=fc2c70d5-709a-45c8-b818-2fffba7463f3')
+)
+
+# Use properties in logging statements
+#properties = {'custom_dimensions': {'key_1': 'value_1', 'key_2': 'value_2'}}
+#logger.warning('action', extra=properties)
+
+
+
 """Flight booking dialog."""
 
 from datatypes_date_time.timex import Timex
@@ -32,14 +50,13 @@ class BookingDialog(CancelAndHelpDialog):
                 self.destination_step,
                 self.origin_step,
                 self.travel_date_step,
-                # TODO returnDate
-                #self.test,
                 self.return_date_step,
-                # TODO buget
                 self.budget_step,
                 self.test2,
+                self.test3,
                 #self.confirm_step,
-                self.final_step,
+                
+                self.final_step2,
             ],
         )
         waterfall_dialog.telemetry_client = telemetry_client
@@ -62,7 +79,8 @@ class BookingDialog(CancelAndHelpDialog):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
-                    prompt=MessageFactory.text(f"To what city would you like to travel? {booking_details}")
+                    #prompt=MessageFactory.text(f"To what city would you like to travel? {booking_details}")
+                    prompt=MessageFactory.text("To what city would you like to travel?")
                 ),
             )  # pylint: disable=line-too-long,bad-continuation
 
@@ -70,6 +88,8 @@ class BookingDialog(CancelAndHelpDialog):
 
     async def origin_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         """Prompt for origin city."""
+        
+
         booking_details = step_context.options
 
         # Capture the response to the previous step's prompt
@@ -78,7 +98,8 @@ class BookingDialog(CancelAndHelpDialog):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
-                    prompt=MessageFactory.text(f"From what city will you be travelling? {booking_details}")
+                    prompt=MessageFactory.text("From what city will you be travelling?")
+#                    prompt=MessageFactory.text(f"From what city will you be travelling? {booking_details}")
                 ),
             )  # pylint: disable=line-too-long,bad-continuation
 
@@ -102,12 +123,6 @@ class BookingDialog(CancelAndHelpDialog):
             )  # pylint: disable=line-too-long
 
         return await step_context.next(booking_details.travel_date)
-
-    async def test(
-        self, step_context: WaterfallStepContext
-    ) -> DialogTurnResult:
-        return await step_context.prompt(TextPrompt.__name__,PromptOptions(prompt=MessageFactory.text(
-            "txt test ?")))
 
     async def return_date_step(
         self, step_context: WaterfallStepContext
@@ -153,7 +168,8 @@ class BookingDialog(CancelAndHelpDialog):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
-                    prompt=MessageFactory.text(f"budget ? {booking_details}")
+                    prompt=MessageFactory.text("budget ?")
+#                    prompt=MessageFactory.text(f"budget ? {booking_details}")
                 ),
             )
         #if not booking_details.budget:
@@ -167,25 +183,59 @@ class BookingDialog(CancelAndHelpDialog):
     async def test2(
         self, step_context: WaterfallStepContext
     ) -> DialogTurnResult:
-        
+        #logger.warning("log confirm_step()")
         booking_details = step_context.options
+        booking_details.budget = step_context.result
+        
         msg = (
             f"Please confirm, I have you traveling to: { booking_details.destination }"
             f" from: { booking_details.origin } on: { booking_details.travel_date}."
             f" return: { booking_details.return_date } for: { booking_details.budget}."
-            f" OBJECT: { booking_details } "
+         #   f" OBJECT: { booking_details } "
         )
         return await step_context.prompt(TextPrompt.__name__,PromptOptions(prompt=MessageFactory.text(
             msg)))
-    
+
+   # TODO
+    async def test3(
+        self, step_context: WaterfallStepContext
+    ) -> DialogTurnResult:
+    #properties = {'custom_dimensions': {'key_1': 'value_1', 'key_2': 'value_2'}}
+#logger.warning('action', extra=properties)
+        
+        booking_details = step_context.options
+        booking_details.validate = step_context.result
+        
+        if booking_details.validate == "yes":
+            msg = "you say YES, i confirmed your flight"
+        else:
+            msg = "you say NO, let's restart"
+            logger.warning("user say no", extra={'test': {'key_1': 'value_1', 'key_2': 'value_2'}})#step_context.dialogs)
+        
+        # voir journal log severity == 0 and message == "notConfirmed"
+        self.telemetry_client.track_trace(name='notConfirmed', properties={"destination":str(booking_details.destination),
+                                                                            "origin":str(booking_details.origin),
+                                                                            "travel_date":str(booking_details.travel_date),
+                                                                            "return_date":str(booking_details.return_date),
+                                                                            "budget":str(booking_details.budget)})
+        
+        return await step_context.prompt(TextPrompt.__name__,PromptOptions(prompt=MessageFactory.text(
+            msg)))
+
+
     async def confirm_step(
         self, step_context: WaterfallStepContext
     ) -> DialogTurnResult:
         """Confirm the information the user has provided."""
+
+        # TODO
+        #logger.info("log_info (i)")
+        logger.warning("log confirm_step()")
+
         booking_details = step_context.options
 
         # Capture the results of the previous step
-        booking_details.travel_date = step_context.result
+        booking_details.budget = step_context.result
         msg = (
             f"Please confirm, I have you traveling to: { booking_details.destination }"
             f" from: { booking_details.origin } on: { booking_details.travel_date}."
@@ -204,6 +254,10 @@ class BookingDialog(CancelAndHelpDialog):
 
             return await step_context.end_dialog(booking_details)
 
+        return await step_context.end_dialog()
+
+    async def final_step2(self, step_context: WaterfallStepContext) -> DialogTurnResult:
+        """Complete the interaction and end the dialog."""
         return await step_context.end_dialog()
 
     def is_ambiguous(self, timex: str) -> bool:
