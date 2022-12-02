@@ -5,7 +5,7 @@
 
 """Flight booking dialog."""
 
-from datatypes_date_time.timex import Timex
+#from datatypes_date_time.timex import Timex
 
 from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext, DialogTurnResult
 from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
