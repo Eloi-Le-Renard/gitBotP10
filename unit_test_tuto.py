@@ -311,7 +311,7 @@ class EmailPromptTest(unittest2.TestCase):
         dialogs = DialogSet(dialogs_state)
         dialogs.add(BookingDialog())
         step1 = await adapter.test('Hello', 'What can I help you with today?')
-        step2 = await step1.send('book flight')
+        step2 = await step1.send('popopopop')
         await step2.assert_reply("To what city would you like to travel?")
 
         conv_state = ConversationState(MemoryStorage())
