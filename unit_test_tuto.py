@@ -307,17 +307,18 @@ class EmailPromptTest(unittest2.TestCase):
         adapter = TestAdapter(exec_test)
 
         conv_state = ConversationState(MemoryStorage())
-
         dialogs_state = conv_state.create_property("dialog-state")
         dialogs = DialogSet(dialogs_state)
-        #dialogs.add(EmailPrompt("emailprompt"))
         dialogs.add(BookingDialog())
-
-        #step1 = await adapter.test('Hello', 'What is your email address?')
-        #step2 = await step1.send('My email id is r.vinoth@live.com')
-        #await step2.assert_reply("r.vinoth@live.com")
-        
         step1 = await adapter.test('Hello', 'What can I help you with today?')
         step2 = await step1.send('book flight')
+        await step2.assert_reply("To what city would you like to travel?")
+
+        conv_state = ConversationState(MemoryStorage())
+        dialogs_state = conv_state.create_property("dialog-state")
+        dialogs = DialogSet(dialogs_state)
+        dialogs.add(BookingDialog())
+        step1 = await adapter.test('Hello', 'What can I help you with today?')
+        step2 = await step1.send('book a flight')
         await step2.assert_reply("To what city would you like to travel?")
 
