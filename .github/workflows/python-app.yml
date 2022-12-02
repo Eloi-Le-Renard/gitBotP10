@@ -33,5 +33,5 @@ jobs:
       run: |
         #python unit_test.py
         #python dialogs/unit_test_tuto.py
-        python -m unittest dialogs/unit_test_tuto.py
+        python -m unittest unit_test_tuto.py
         #pytest unit_test.py
