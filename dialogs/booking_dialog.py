@@ -12,11 +12,6 @@ logger.addHandler(AzureLogHandler(
     connection_string='InstrumentationKey=fc2c70d5-709a-45c8-b818-2fffba7463f3')
 )
 
-# Use properties in logging statements
-#properties = {'custom_dimensions': {'key_1': 'value_1', 'key_2': 'value_2'}}
-#logger.warning('action', extra=properties)
-
-
 
 """Flight booking dialog."""
 
