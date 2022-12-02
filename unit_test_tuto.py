@@ -294,7 +294,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                         text = "What can I help you with today?"
                         )
                     )
-                await dialog_context.prompt("emailprompt", options)
+                #await dialog_context.prompt("emailprompt", options)
                 #await dialog_context.prompt(options)
 
             elif results.status == DialogTurnStatus.Complete:
