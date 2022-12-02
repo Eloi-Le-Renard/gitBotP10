@@ -1,6 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
+assert False
 
 """Flight booking dialog."""
 
@@ -294,8 +295,8 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                         text = "What can I help you with today?"
                         )
                     )
-                #await dialog_context.prompt("emailprompt", options)
-                await dialog_context.prompt(options)
+                await dialog_context.prompt("emailprompt", options)
+                #await dialog_context.prompt(options)
 
             elif results.status == DialogTurnStatus.Complete:
                 reply = results.result
