@@ -255,9 +255,9 @@ class BookingDialog(CancelAndHelpDialog):
 # ###################### ###################### ###################### ######################
 # ###################### ###################### ###################### ######################
 # TODO remettre ?
-#import pytest
-#import aiounittest
-import unittest2
+import pytest
+import aiounittest
+#import unittest2
 import asyncio
 
 #current = pathlib.Path(__file__).parent.parent
@@ -281,8 +281,8 @@ from botbuilder.dialogs import DialogSet, DialogTurnStatus
 #from email_prompt import EmailPrompt
 from botbuilder.core.adapters import TestAdapter
 
-#class EmailPromptTest(aiounittest.AsyncTestCase):
-class EmailPromptTest(unittest2.TestCase):
+class EmailPromptTest(aiounittest.AsyncTestCase):
+#class EmailPromptTest(unittest2.TestCase):
     async def test_email_prompt(self):
         async def exec_test(turn_context:TurnContext):
             dialog_context = await dialogs.create_context(turn_context)

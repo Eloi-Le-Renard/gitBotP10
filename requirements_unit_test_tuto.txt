@@ -12,6 +12,6 @@ azure-cognitiveservices-language-luis>=0.2.0
 msrest>=0.6.10
 opencensus-ext-azure
 datatypes-date-time
-#aiounittest
-#pytest
-unittest2
+aiounittest
+#unittest2
+pytest
