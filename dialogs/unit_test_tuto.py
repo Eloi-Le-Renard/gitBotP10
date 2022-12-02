@@ -1,6 +1,8 @@
 #import sys
 #import pathlib
-import pytest
+
+# TODO remettre ?
+#import pytest
 import aiounittest
 import asyncio
 
