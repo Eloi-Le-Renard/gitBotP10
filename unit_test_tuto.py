@@ -2,7 +2,6 @@
 # Licensed under the MIT License.
 
 
-
 """Flight booking dialog."""
 
 from datatypes_date_time.timex import Timex
