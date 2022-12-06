@@ -1,10 +1,19 @@
 from dialogs.booking_dialog import BookingDialog
 from booking_details import BookingDetails
 
+
+###################### ###################### ###################### ######################
+# ###################### ###################### ###################### ######################
+# ###################### ###################### ###################### ######################
+# TODO remettre ?
 import pytest
 import aiounittest
 #import unittest2
 import asyncio
+
+#current = pathlib.Path(__file__).parent.parent
+#libpath = current.joinpath("D:\\mySample\\code\\github\\VideoTutorial\\BotTutorialSample\\Python_tutorial\\24-CustomPrompt\\prompt")
+#sys.path.append(str(libpath))
 
 from botbuilder.dialogs.prompts import (
     AttachmentPrompt, 
