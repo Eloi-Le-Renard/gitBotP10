@@ -24,7 +24,6 @@ from botbuilder.dialogs import DialogSet, DialogTurnStatus
 from botbuilder.core.adapters import TestAdapter
 
 booking_details = BookingDetails()
-
 class EmailPromptTest(aiounittest.AsyncTestCase):
     async def test_email_prompt(self):
         async def exec_test(turn_context:TurnContext):
@@ -32,7 +31,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
             results = await dialog_context.continue_dialog()
             if (results.status == DialogTurnStatus.Empty):
                 dialog_context.options = booking_details
-                await dialog_context.begin_dialog("dialog_id", booking_details)
+                await dialog_context.begin_dialog("dialog_id", BookingDetails())
             elif results.status == DialogTurnStatus.Complete:
                 reply = results.result
                 await turn_context.send_activity(reply)
@@ -43,7 +42,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
 
         dialogs_state = conv_state.create_property("dialog-state")
         dialogs = DialogSet(dialogs_state)
-        dialogs.add(BookingDialog())
+        dialogs.add(BookingDialog("dialog_id"))
 
         step1 = await adapter.test('Hello', 'What can I help you with today?')
         step2 = await step1.send('popopopop')
