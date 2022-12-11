@@ -45,6 +45,6 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs.add(BookingDialog("dialog_id"))
 
         step1 = await adapter.test('Hello', 'What can I help you with today?')
-        step2 = await step1.send('popopopop')
+        step2 = await step1.send('book a flight')
         await step2.assert_reply("To what city would you like to travel?")
 
