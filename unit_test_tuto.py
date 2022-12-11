@@ -37,16 +37,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                 await turn_context.send_activity(reply)
             await conv_state.save_changes(turn_context)
 
-        adapter = TestAdapter(exec_test)
-        conv_state = ConversationState(MemoryStorage())
-        dialogs_state = conv_state.create_property("dialog-state")
-        dialogs = DialogSet(dialogs_state)
-        dialogs.add(BookingDialog("dialog_id"))
-        step1 = await adapter.test('Hello', 'To what city would you like to travel?')
-#        step1 = await adapter.test('Hello', 'What can I help you with today?')
-        step2 = await step1.send('paris')
-#        step2 = await step1.send('book a flight')
-        await step2.assert_reply("From what city will you be travelling?")
+
 
         adapter = TestAdapter(exec_test)
         conv_state = ConversationState(MemoryStorage())
