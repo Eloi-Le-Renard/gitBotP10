@@ -48,5 +48,5 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
 #        step1 = await adapter.test('Hello', 'What can I help you with today?')
         step2 = await step1.send('paris')
 #        step2 = await step1.send('book a flight')
-        await step2.assert_reply("To what city would you like to travel?")
+        await step2.assert_reply("From what city will you be travelling?")
 
