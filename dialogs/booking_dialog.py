@@ -49,7 +49,7 @@ class BookingDialog(CancelAndHelpDialog):
                 self.budget_step,
                 self.confirmation_step,
                 self.conclusion_step,                
-                self.final_step2,
+                self.final_step,
             ],
         )
         waterfall_dialog.telemetry_client = telemetry_client
@@ -206,12 +206,6 @@ class BookingDialog(CancelAndHelpDialog):
 
     async def final_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         """Complete the interaction and end the dialog."""
-        if step_context.result:
-            booking_details = step_context.options
-            booking_details.travel_date = step_context.result
-
-            return await step_context.end_dialog(booking_details)
-
         return await step_context.end_dialog()
 
     def is_ambiguous(self, timex: str) -> bool:
