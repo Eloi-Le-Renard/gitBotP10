@@ -43,9 +43,13 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         dialogs = DialogSet(dialogs_state)
         dialogs.add(BookingDialog("dialog_id"))
 
-        step1 = await adapter.send('Hello')
+        step1 = await adapter.send('book a flight to paris from berlin for the 11/11/22 with budget of 999$')
         step2 = await step1.assert_reply("To what city would you like to travel?")
         step3 = await step2.send('paris')
         await step3.assert_reply("From what city will you be travelling?")
+        #step1 = await adapter.send('Hello')
+        #step2 = await step1.assert_reply("To what city would you like to travel?")
+        #step3 = await step2.send('paris')
+        #await step3.assert_reply("From what city will you be travelling?")
 
 
