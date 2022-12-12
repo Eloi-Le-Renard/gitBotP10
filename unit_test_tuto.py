@@ -37,6 +37,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
                 await turn_context.send_activity(reply)
             await conv_state.save_changes(turn_context)
 
+        # dialog test 1
         adapter = TestAdapter(exec_test)
         conv_state = ConversationState(MemoryStorage())
         dialogs_state = conv_state.create_property("dialog-state")
@@ -51,14 +52,30 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         step5 = await step4.send('berlin')
         step6 = await step5.assert_reply("On what date would you like to travel?")
         step7 = await step6.send('11/11/121')
-        step_end = await step7.assert_reply("I'm sorry, for best results, please enter your travel date including the month, day and year.")
+        step_final = await step7.assert_reply("I'm sorry, for best results, please enter your travel date including the month, day and year.")
         
-        
+        # dialog test 2
+        adapter = TestAdapter(exec_test)
+        conv_state = ConversationState(MemoryStorage())
+        dialogs_state = conv_state.create_property("dialog-state")
+        dialogs = DialogSet(dialogs_state)
+        dialogs.add(BookingDialog("dialog_id"))
 
-        
-        #step1 = await adapter.send('Hello')
-        #step2 = await step1.assert_reply("To what city would you like to travel?")
-        #step3 = await step2.send('paris')
-        #await step3.assert_reply("From what city will you be travelling?")
+        step1 = await adapter.send('peut importe')
+        step2 = await step1.assert_reply("To what city would you like to travel?")
+        step3 = await step2.send('paris')
+        step4 = await step3.assert_reply("From what city will you be travelling?")
+        step5 = await step4.send('berlin')
+        step6 = await step5.assert_reply("On what date would you like to travel?")
+        step7 = await step6.send('11/11/22')
+        step8 = await step7.assert_reply("return date ?")
+        step9 = await step8.send('12/11/22')
+        step10 = await step9.assert_reply("budget ?")
+        step11 = await step10.send('999$')
+        step12 = await step11.assert_reply("Please confirm, I have you traveling to: paris from: berlin on: 2022-11-11. return: 12/11/22 for max: 999$.")
+        step13 = await step12.send('yes')
+        step_final = await step13.assert_reply("you say YES, i confirmed your flight")
+
+
 
 
