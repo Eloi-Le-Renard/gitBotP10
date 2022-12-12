@@ -21,7 +21,6 @@ from flight_booking_recognizer import FlightBookingRecognizer
 from helpers.luis_helper import LuisHelper, Intent
 from .booking_dialog import BookingDialog
 
-# TODO try exception to trigger alert
 import logging
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 
