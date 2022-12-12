@@ -51,7 +51,7 @@ class EmailPromptTest(aiounittest.AsyncTestCase):
         step5 = await step4.send('berlin')
         step6 = await step5.assert_reply("On what date would you like to travel?")
         step7 = await step6.send('11/11/121')
-        step_end = await step7.assert_reply("I’m sorry, for best results, please enter your travel date including the month, day and year.")
+        step_end = await step7.assert_reply("I'm sorry, for best results, please enter your travel date including the month, day and year.")
         
         
 
